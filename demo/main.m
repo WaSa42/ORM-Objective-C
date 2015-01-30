@@ -5,11 +5,22 @@
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        id user = [User userWithId:1 username:@"bob"];
-        NSLog(@"the username is : %@", [user username]);
+        // Create an user
+        User *user = [User instantiateWithId:1 andUsername:@"bob"];
+        NSLog(@"username : %@", [user username]);
 
-        // TODO: persist the user
-    }
+        // Insert the user
+        EntityManager *em = [EntityManager instantiate];
+        [em insert: user];
+
+        // Generate a query
+        QueryBuilder *qb = [QueryBuilder instantiate];
+
+        NSArray *fields = @[@"field1", @"field2", @"field3"];
+        [qb select: fields];
+
+        NSLog(@"query : %@", [qb query]);
+    };
 
     return 0;
 }

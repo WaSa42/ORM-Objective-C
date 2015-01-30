@@ -5,7 +5,7 @@
     @synthesize id;
     @synthesize username;
 
-- (instancetype)initWithId:(int)anId username:(NSString *)anUsername {
+- (instancetype)initWithId:(int)anId andUsername:(NSString *)anUsername {
     self = [super init];
 
     if (self) {
@@ -16,8 +16,8 @@
     return self;
 }
 
-+ (instancetype)userWithId:(int)anId username:(NSString *)anUsername {
-    return [[self alloc] initWithId:anId username:anUsername];
++ (instancetype)instantiateWithId:(int)anId andUsername:(NSString *)anUsername {
+    return [[self alloc] initWithId:anId andUsername:anUsername];
 }
 
 @end

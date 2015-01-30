@@ -8,7 +8,7 @@
 @property int id;
 @property NSString *username;
 
-- (instancetype)initWithId:(int)anId username:(NSString *)anUsername;
-+ (instancetype)userWithId:(int)anId username:(NSString *)anUsername;
+- (instancetype)initWithId:(int)anId andUsername:(NSString *)anUsername;
++ (instancetype)instantiateWithId:(int)anId andUsername:(NSString *)anUsername;
 
 @end
