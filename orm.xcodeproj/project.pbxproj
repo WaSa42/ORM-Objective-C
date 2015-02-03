@@ -7,23 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		17DB54DCCD21A762B88017F4 /* ORM.h in Headers */ = {isa = PBXBuildFile; fileRef = 17DB56E90D1297A507FE3511 /* ORM.h */; };
+		17DB52BBE8DC9E1156A7A135 /* ManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DB57084A9EF920493D68C6 /* ManagedObject.m */; };
 		17DB56752F1A9A36A317AFAF /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DB57FA2863B3A2E3177E4E /* User.m */; };
-		17DB58C5BA9D41CED6318171 /* EntityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DB5B9883FB420EAE3F4305 /* EntityManager.m */; };
-		17DB590E234F5D34186B6709 /* liborm.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 17DB5E5B69AFE3E5A2ADA76F /* liborm.dylib */; };
+		17DB5AEC63A1F1C4B6398DCE /* EntityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DB571B002436ED4BD71E32 /* EntityManager.m */; };
 		17DB5B10A19E53EB70804D06 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DB51E14C44058D964623CC /* main.m */; };
-		17DB5D7E392054752279B2F6 /* EntityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 17DB590DDBF8A3275B21E8D6 /* EntityManager.h */; };
+		17DB5E2D3ECDCFE472FFF64F /* QueryBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DB5DFE8DEB4680D2C60B76 /* QueryBuilder.m */; };
+		17DB5EA4F07D68A70ED67DB5 /* DataExtractor.h in Headers */ = {isa = PBXBuildFile; fileRef = 17DB51EBBD3DE57A1F7AA7D6 /* DataExtractor.h */; };
+		C4AB88F31A80472400988153 /* DataExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DB537DE1704EF970A2B801 /* DataExtractor.m */; };
+		C4AB88F41A80473100988153 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 17DB5C3494526D5BA1478DD9 /* libsqlite3.dylib */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		17DB5AEE9B474B2AF42F4B1A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 17DB5A4D6D6160BE9D3461EA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 17DB5CD90107D1DF0C10B1C2;
-			remoteInfo = orm;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		17DB59B6392C220ACF0CA586 /* CopyFiles */ = {
@@ -38,16 +30,22 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		17DB5048AF9D044812C665C9 /* ormTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ormTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		17DB51E14C44058D964623CC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		17DB56E90D1297A507FE3511 /* ORM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORM.h; sourceTree = "<group>"; };
+		17DB51EBBD3DE57A1F7AA7D6 /* DataExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataExtractor.h; sourceTree = "<group>"; };
+		17DB537DE1704EF970A2B801 /* DataExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataExtractor.m; sourceTree = "<group>"; };
+		17DB56A858163D69BE2A7EC4 /* ORM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORM.h; sourceTree = "<group>"; };
+		17DB57084A9EF920493D68C6 /* ManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManagedObject.m; sourceTree = "<group>"; };
+		17DB571B002436ED4BD71E32 /* EntityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityManager.m; sourceTree = "<group>"; };
 		17DB57FA2863B3A2E3177E4E /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		17DB590DDBF8A3275B21E8D6 /* EntityManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EntityManager.h; sourceTree = "<group>"; };
 		17DB59D1786C1042BAFE997F /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		17DB5B9883FB420EAE3F4305 /* EntityManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EntityManager.m; sourceTree = "<group>"; };
+		17DB5A6850D960DF043916D1 /* ManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManagedObject.h; sourceTree = "<group>"; };
+		17DB5AF08D5A6DA11C471FFC /* Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Action.h; sourceTree = "<group>"; };
+		17DB5B585AF4AEF70773337D /* QueryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryBuilder.h; sourceTree = "<group>"; };
+		17DB5C3494526D5BA1478DD9 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		17DB5D56EAA58EC512062CED /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
+		17DB5DFE8DEB4680D2C60B76 /* QueryBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryBuilder.m; sourceTree = "<group>"; };
 		17DB5DFEA4B665C8CDF3F513 /* demo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = demo; sourceTree = BUILT_PRODUCTS_DIR; };
-		17DB5E5B69AFE3E5A2ADA76F /* liborm.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = liborm.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
-		17DB5FCD7ABE415895E9A2A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
+		17DB5EAFA3E57C42E0F367B1 /* EntityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityManager.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,14 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		17DB561CBA2A76D5E799EE15 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				17DB590E234F5D34186B6709 /* liborm.dylib in Frameworks */,
+				C4AB88F41A80473100988153 /* libsqlite3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,20 +67,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		17DB5026E9280E10DBF531BD /* ormTests */ = {
+		17DB511CF8CD579B102DDE4A /* qb */ = {
 			isa = PBXGroup;
 			children = (
-				17DB59F1A835C1A259D3ED95 /* Supporting Files */,
+				17DB5B585AF4AEF70773337D /* QueryBuilder.h */,
+				17DB5DFE8DEB4680D2C60B76 /* QueryBuilder.m */,
 			);
-			path = ormTests;
+			path = qb;
 			sourceTree = "<group>";
 		};
-		17DB53D0E9D83CC54DD54EB5 /* orm */ = {
+		17DB536082ED5ECC9EEAD3AA /* orm */ = {
 			isa = PBXGroup;
 			children = (
-				17DB590DDBF8A3275B21E8D6 /* EntityManager.h */,
-				17DB5B9883FB420EAE3F4305 /* EntityManager.m */,
-				17DB56E90D1297A507FE3511 /* ORM.h */,
+				17DB5B3D49777A82C28EFE60 /* em */,
+				17DB511CF8CD579B102DDE4A /* qb */,
+				17DB56A858163D69BE2A7EC4 /* ORM.h */,
 			);
 			path = orm;
 			sourceTree = "<group>";
@@ -106,29 +98,40 @@
 		17DB56F1303EC5D5EB803A62 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				17DB5E5B69AFE3E5A2ADA76F /* liborm.dylib */,
-				17DB5048AF9D044812C665C9 /* ormTests.xctest */,
 				17DB5DFEA4B665C8CDF3F513 /* demo */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		17DB56F7015F44D60CB086E9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				17DB5C3494526D5BA1478DD9 /* libsqlite3.dylib */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		17DB593B9AFB53B384BD8F5A = {
 			isa = PBXGroup;
 			children = (
 				17DB56F1303EC5D5EB803A62 /* Products */,
-				17DB53D0E9D83CC54DD54EB5 /* orm */,
-				17DB5026E9280E10DBF531BD /* ormTests */,
 				17DB5FB3DAAB23496068F816 /* demo */,
+				17DB56F7015F44D60CB086E9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		17DB59F1A835C1A259D3ED95 /* Supporting Files */ = {
+		17DB5B3D49777A82C28EFE60 /* em */ = {
 			isa = PBXGroup;
 			children = (
-				17DB5FCD7ABE415895E9A2A2 /* Info.plist */,
+				17DB5AF08D5A6DA11C471FFC /* Action.h */,
+				17DB5EAFA3E57C42E0F367B1 /* EntityManager.h */,
+				17DB571B002436ED4BD71E32 /* EntityManager.m */,
+				17DB5A6850D960DF043916D1 /* ManagedObject.h */,
+				17DB57084A9EF920493D68C6 /* ManagedObject.m */,
+				17DB537DE1704EF970A2B801 /* DataExtractor.m */,
+				17DB51EBBD3DE57A1F7AA7D6 /* DataExtractor.h */,
 			);
-			name = "Supporting Files";
+			path = em;
 			sourceTree = "<group>";
 		};
 		17DB5FB3DAAB23496068F816 /* demo */ = {
@@ -136,6 +139,8 @@
 			children = (
 				17DB51E14C44058D964623CC /* main.m */,
 				17DB56361A39ECEA7F7B7F6E /* entity */,
+				17DB536082ED5ECC9EEAD3AA /* orm */,
+				17DB5D56EAA58EC512062CED /* main.h */,
 			);
 			path = demo;
 			sourceTree = "<group>";
@@ -147,8 +152,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17DB5D7E392054752279B2F6 /* EntityManager.h in Headers */,
-				17DB54DCCD21A762B88017F4 /* ORM.h in Headers */,
+				17DB5EA4F07D68A70ED67DB5 /* DataExtractor.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,24 +176,6 @@
 			productReference = 17DB5DFEA4B665C8CDF3F513 /* demo */;
 			productType = "com.apple.product-type.tool";
 		};
-		17DB54E3F59A08BE2592F62E /* ormTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 17DB5411FA8D43C5B3397E2E /* Build configuration list for PBXNativeTarget "ormTests" */;
-			buildPhases = (
-				17DB526769CF6384E1DD0B79 /* Sources */,
-				17DB561CBA2A76D5E799EE15 /* Frameworks */,
-				17DB594296D5165621CE5088 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				17DB52BDEF9BF74D8D7E7650 /* PBXTargetDependency */,
-			);
-			name = ormTests;
-			productName = ormTests;
-			productReference = 17DB5048AF9D044812C665C9 /* ormTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		17DB5CD90107D1DF0C10B1C2 /* orm */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 17DB530EBB3ED596ED36C8C7 /* Build configuration list for PBXNativeTarget "orm" */;
@@ -204,7 +190,6 @@
 			);
 			name = orm;
 			productName = orm;
-			productReference = 17DB5E5B69AFE3E5A2ADA76F /* liborm.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
@@ -213,6 +198,7 @@
 		17DB5A4D6D6160BE9D3461EA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = SUPINFO;
 			};
 			buildConfigurationList = 17DB5299A096168FC95AA0B4 /* Build configuration list for PBXProject "orm" */;
@@ -228,36 +214,22 @@
 			projectRoot = "";
 			targets = (
 				17DB5CD90107D1DF0C10B1C2 /* orm */,
-				17DB54E3F59A08BE2592F62E /* ormTests */,
 				17DB514CA09709AC650234A3 /* demo */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		17DB594296D5165621CE5088 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		17DB519CB4E106A70D6EC935 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4AB88F31A80472400988153 /* DataExtractor.m in Sources */,
 				17DB5B10A19E53EB70804D06 /* main.m in Sources */,
 				17DB56752F1A9A36A317AFAF /* User.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		17DB526769CF6384E1DD0B79 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				17DB5AEC63A1F1C4B6398DCE /* EntityManager.m in Sources */,
+				17DB52BBE8DC9E1156A7A135 /* ManagedObject.m in Sources */,
+				17DB5E2D3ECDCFE472FFF64F /* QueryBuilder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,35 +237,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17DB58C5BA9D41CED6318171 /* EntityManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		17DB52BDEF9BF74D8D7E7650 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 17DB5CD90107D1DF0C10B1C2 /* orm */;
-			targetProxy = 17DB5AEE9B474B2AF42F4B1A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		17DB51B47210B35F2ACC9E04 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = ormTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
 		17DB54A90ECAB3CB37F33104 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -338,23 +287,10 @@
 		17DB55364B6EDE787795EF3E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		17DB56763B74352A6DDEC6AB /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = ormTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -471,6 +407,7 @@
 		17DB5F6ED5653135FA0AE8C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
@@ -497,14 +434,7 @@
 				17DB55364B6EDE787795EF3E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		17DB5411FA8D43C5B3397E2E /* Build configuration list for PBXNativeTarget "ormTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				17DB51B47210B35F2ACC9E04 /* Debug */,
-				17DB56763B74352A6DDEC6AB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		17DB557AD96F1FDDB86574DB /* Build configuration list for PBXNativeTarget "demo" */ = {
 			isa = XCConfigurationList;
@@ -513,6 +443,7 @@
 				17DB5D8EA306033294FB1E1A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

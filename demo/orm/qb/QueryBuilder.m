@@ -18,96 +18,112 @@
     return [[self alloc] init];
 }
 
-- (instancetype)selectField:(NSString *)field {
-    [query appendString:@"SELECT '"];
-    [query appendString:field];
-    [query appendString:@"' "];
+- (instancetype)select {
+    [self spaceOut:SELECT];
 
     return self;
 }
 
-- (instancetype)selectFields:(NSArray *)fields {
-    [query appendString:@"SELECT '"];
-    [query appendString:[fields componentsJoinedByString:@"', '"]];
-    [query appendString:@"' "];
+- (instancetype)all {
+    [self spaceOut:ALL];
 
     return self;
 }
 
-- (instancetype)selectAll {
-    [query appendString:@"SELECT * "];
+- (instancetype)field:(NSString *)field {
+    [self wrap:field];
+
+    return self;
+}
+
+- (instancetype)fields:(NSArray *)fields {
+    [self wrap:[fields componentsJoinedByString:JOINER]];
 
     return self;
 }
 
 
 - (instancetype)from:(NSString *)table {
-    [query appendString:@"FROM '"];
-    [query appendString:table];
-    [query appendString:@"' "];
+    [self spaceOut:FROM];
+    [self wrap:table];
+
+    return self;
+}
+
+
+- (instancetype)insertInto:(NSString *)table {
+    [self spaceOut:INSERT];
+    [self wrap:table];
+
+    return self;
+}
+
+- (instancetype)values:(NSArray *)values {
+    [self spaceOut:VALUES];
+    [self wrap:[values componentsJoinedByString:JOINER]];
 
     return self;
 }
 
 - (instancetype)where:(NSString *)field {
-    [query appendString:@"WHERE '"];
-    [query appendString:field];
-    [query appendString:@"' "];
+    [self spaceOut:WHERE];
+    [self wrap:field];
 
     return self;
 }
 
 - (instancetype)andWhere:(NSString *)field {
-    [query appendString:@"AND '"];
-    [query appendString:field];
-    [query appendString:@"' "];
+    [self spaceOut:AND];
+    [self wrap:field];
 
     return self;
 }
 
 - (instancetype)orWhere:(NSString *)field {
-    [query appendString:@"OR '"];
-    [query appendString:field];
-    [query appendString:@"' "];
+    [self spaceOut:OR];
+    [self wrap:field];
 
     return self;
 }
 
 - (instancetype)is:(NSString *)value {
-    [query appendString:@"= '"];
-    [query appendString:value];
-    [query appendString:@"' "];
+    [self spaceOut:IS];
+    [self wrap:value];
 
     return self;
 }
 
 - (instancetype)isNot:(NSString *)value {
-    [query appendString:@"!"];
+    [self spaceOut:IS_NOT];
+    [self wrap:value];
 
-    return [self is:value];
+    return self;
 }
 
 - (instancetype)isIn:(NSArray *)values {
-    [query appendString:@"IN ('"];
-    [query appendString:[values componentsJoinedByString:@"', '"]];
-    [query appendString:@"') "];
+    [self spaceOut:IN];
+    [self wrap:[values componentsJoinedByString:JOINER]];
 
     return self;
 }
 
 - (instancetype)isNotIn:(NSArray *)values {
-    [query appendString:@"NOT "];
+    [self spaceOut:NOT_IN];
+    [self wrap:[values componentsJoinedByString:JOINER]];
 
-    return [self isIn:values];
+    return self;
 }
 
-- (instancetype)select:(NSArray *)fields from:(NSString *)from {
-    return nil;
+- (void)spaceOut:(NSString *)value {
+    [query appendFormat:@"%@ ", value];
+}
+
+- (void)wrap:(NSString *)value {
+    [query appendFormat:@"('%@') ", value];
 }
 
 - (void)reset {
     self.query = [NSMutableString string];
 }
-
 
 @end

@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSUInteger, ActionType) {
-    INSERT,
-    UPDATE,
-    REMOVE
+    ACTION_INSERT,
+    ACTION_UPDATE,
+    ACTION_REMOVE
 };

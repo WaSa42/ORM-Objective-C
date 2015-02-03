@@ -5,19 +5,19 @@
     @synthesize id;
     @synthesize username;
 
-- (instancetype)initWithId:(int)anId andUsername:(NSString *)anUsername {
+- (instancetype)initWithUsername:(NSString *)aUsername andPassword:(NSString *)aPassword {
     self = [super init];
 
     if (self) {
-        self.id = anId;
-        self.username = anUsername;
+        self.username = aUsername;
+        self.password = aPassword;
     }
 
     return self;
 }
 
-+ (instancetype)instantiateWithId:(int)anId andUsername:(NSString *)anUsername {
-    return [[self alloc] initWithId:anId andUsername:anUsername];
++ (instancetype)instantiateWithUsername:(NSString *)username andPassword:(NSString *)password {
+    return [[self alloc] initWithUsername:username andPassword:password];
 }
 
 @end
