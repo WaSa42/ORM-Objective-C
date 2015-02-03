@@ -14,7 +14,10 @@
     for(unsigned int i = 0; i < totalProperties; i++) {
         objc_property_t currentProperty = properties[i];
         NSString *key = [NSString stringWithUTF8String:property_getName(currentProperty)];
-        [keys addObject:key];
+
+        if (![key isEqualToString:PRIMARY_KEY]) {
+            [keys addObject:key];
+        }
     }
 
     free(properties);
@@ -30,6 +33,10 @@
     }
 
     return values;
+}
+
++ (id)getIdFromObject:(id)object {
+    return [object valueForKey:PRIMARY_KEY];
 }
 
 @end

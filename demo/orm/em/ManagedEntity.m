@@ -1,6 +1,6 @@
-#import "ManagedObject.h"
+#import "ManagedEntity.h"
 
-@implementation ManagedObject
+@implementation ManagedEntity
 
     @synthesize object;
     @synthesize action;

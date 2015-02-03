@@ -2,7 +2,7 @@
 
 #import "Action.h"
 
-@interface ManagedObject : NSObject {
+@interface ManagedEntity : NSObject {
     NSObject *object;
     ActionType action;
 }

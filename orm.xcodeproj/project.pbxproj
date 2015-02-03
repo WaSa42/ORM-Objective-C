@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		17DB52BBE8DC9E1156A7A135 /* ManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DB57084A9EF920493D68C6 /* ManagedObject.m */; };
+		17DB52BBE8DC9E1156A7A135 /* ManagedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DB57084A9EF920493D68C6 /* ManagedEntity.m */; };
 		17DB56752F1A9A36A317AFAF /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DB57FA2863B3A2E3177E4E /* User.m */; };
 		17DB5AEC63A1F1C4B6398DCE /* EntityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DB571B002436ED4BD71E32 /* EntityManager.m */; };
 		17DB5B10A19E53EB70804D06 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DB51E14C44058D964623CC /* main.m */; };
@@ -34,11 +34,11 @@
 		17DB51EBBD3DE57A1F7AA7D6 /* DataExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataExtractor.h; sourceTree = "<group>"; };
 		17DB537DE1704EF970A2B801 /* DataExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataExtractor.m; sourceTree = "<group>"; };
 		17DB56A858163D69BE2A7EC4 /* ORM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORM.h; sourceTree = "<group>"; };
-		17DB57084A9EF920493D68C6 /* ManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManagedObject.m; sourceTree = "<group>"; };
+		17DB57084A9EF920493D68C6 /* ManagedEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManagedEntity.m; sourceTree = "<group>"; };
 		17DB571B002436ED4BD71E32 /* EntityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityManager.m; sourceTree = "<group>"; };
 		17DB57FA2863B3A2E3177E4E /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		17DB59D1786C1042BAFE997F /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		17DB5A6850D960DF043916D1 /* ManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManagedObject.h; sourceTree = "<group>"; };
+		17DB5A6850D960DF043916D1 /* ManagedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManagedEntity.h; sourceTree = "<group>"; };
 		17DB5AF08D5A6DA11C471FFC /* Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Action.h; sourceTree = "<group>"; };
 		17DB5B585AF4AEF70773337D /* QueryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryBuilder.h; sourceTree = "<group>"; };
 		17DB5C3494526D5BA1478DD9 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -126,8 +126,8 @@
 				17DB5AF08D5A6DA11C471FFC /* Action.h */,
 				17DB5EAFA3E57C42E0F367B1 /* EntityManager.h */,
 				17DB571B002436ED4BD71E32 /* EntityManager.m */,
-				17DB5A6850D960DF043916D1 /* ManagedObject.h */,
-				17DB57084A9EF920493D68C6 /* ManagedObject.m */,
+				17DB5A6850D960DF043916D1 /* ManagedEntity.h */,
+				17DB57084A9EF920493D68C6 /* ManagedEntity.m */,
 				17DB537DE1704EF970A2B801 /* DataExtractor.m */,
 				17DB51EBBD3DE57A1F7AA7D6 /* DataExtractor.h */,
 			);
@@ -228,7 +228,7 @@
 				17DB5B10A19E53EB70804D06 /* main.m in Sources */,
 				17DB56752F1A9A36A317AFAF /* User.m in Sources */,
 				17DB5AEC63A1F1C4B6398DCE /* EntityManager.m in Sources */,
-				17DB52BBE8DC9E1156A7A135 /* ManagedObject.m in Sources */,
+				17DB52BBE8DC9E1156A7A135 /* ManagedEntity.m in Sources */,
 				17DB5E2D3ECDCFE472FFF64F /* QueryBuilder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

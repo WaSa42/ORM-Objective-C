@@ -1,14 +1,14 @@
 #import <Foundation/Foundation.h>
 
 #import "DataExtractor.h"
-#import "ManagedObject.h"
+#import "ManagedEntity.h"
 #import "QueryBuilder.h"
 
 @interface EntityManager : NSObject {
-    NSMutableArray *managedObjects;
+    NSMutableArray *managedEntities;
 }
 
-@property NSMutableArray *managedObjects;
+@property NSMutableArray *managedEntities;
 
 - (instancetype)init;
 + (instancetype)instantiate;

@@ -40,7 +40,11 @@ void demoEntityManager() {
 
     User *user = [User instantiateWithUsername:@"bob" andPassword:@"bob"];
     EntityManager *em = [EntityManager instantiate];
-    [em insert: user];
+
+    [em insert:user];
+    [em update:user];
+    [em remove:user];
+
     [em flush];
 
     NSLog(@"---");
