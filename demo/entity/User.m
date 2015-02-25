@@ -2,8 +2,9 @@
 
 @implementation User
 
-    @synthesize id;
-    @synthesize username;
+@synthesize id;
+@synthesize username;
+@synthesize password;
 
 - (instancetype)initWithUsername:(NSString *)aUsername andPassword:(NSString *)aPassword {
     self = [super init];

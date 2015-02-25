@@ -56,6 +56,22 @@
     return self;
 }
 
+- (instancetype)create:(NSString *)table withFields:(NSMutableArray *)fields andValues:(NSMutableArray *)values {
+    [self spaceOut:CREATE];
+    [self wrap:table];
+
+    NSMutableArray *definitions = [NSMutableArray array];
+    [definitions addObject:[NSString stringWithFormat:@"%@ INTEGER PRIMARY KEY AUTOINCREMENT", PRIMARY_KEY]];
+
+    for (unsigned int i = 0; i < [fields count]; i++) {
+        [definitions addObject:[NSString stringWithFormat:@"%@ %@", fields[i], [DataExtractor getType:values[i]]]];
+    }
+
+    [self wrap:[definitions componentsJoinedByString:JOINER] withParenthesis:YES];
+
+    return self;
+}
+
 - (instancetype)update:(NSString *)table {
     [self spaceOut:UPDATE];
     [self wrap:table];
@@ -65,20 +81,24 @@
 
 - (instancetype)values:(NSArray *)values {
     [self spaceOut:VALUES];
-    [self wrap:[values componentsJoinedByString:JOINER] withParenthesis:YES];
+    [self wrap:[[[self class] wrapValues:values] componentsJoinedByString:JOINER] withParenthesis:YES];
 
     return self;
 }
 
 - (instancetype)set:(NSDictionary *)data {
     [self spaceOut:SET];
-    NSMutableArray *values = [NSMutableArray array];
+    BOOL first = YES;
 
-    [data enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
-        [values addObject: [NSString stringWithFormat:FORMAT_AFFECT, [QueryBuilder wrap:key], [QueryBuilder wrap:value]]];
-    }];
+    for (NSString* key in data) {
+        if (first) {
+            first = NO;
+        } else {
+            [[self query] appendString:@", "];
+        }
 
-    [self wrap:[values componentsJoinedByString:JOINER] withParenthesis:YES];
+        [self spaceOut:[NSString stringWithFormat:FORMAT_AFFECT, [QueryBuilder wrap:key], [QueryBuilder wrap:data[key]]]];
+    }
 
     return self;
 }
@@ -91,7 +111,7 @@
 
 - (instancetype)where:(NSString *)field {
     [self spaceOut:WHERE];
-    [self wrap:field];
+    [self spaceOut:field];
 
     return self;
 }
@@ -110,7 +130,7 @@
     return self;
 }
 
-- (instancetype)is:(NSString *)value {
+- (instancetype)is:(id)value {
     [self spaceOut:IS];
     [self wrap:value];
 

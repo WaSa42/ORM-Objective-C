@@ -2,11 +2,11 @@
 
 @implementation DataExtractor
 
-+ (NSString *)getTableFromObject:(id)object {
++ (NSString *)getObjectName:(id)object {
     return [NSStringFromClass([object class]) lowercaseString];
 }
 
-+ (NSArray *)getKeysFromObject:(id)object {
++ (NSMutableArray *)getKeysFromObject:(id)object {
     unsigned int totalProperties;
     NSMutableArray *keys = [NSMutableArray array];
     objc_property_t *properties = class_copyPropertyList([object class], &totalProperties);
@@ -25,7 +25,7 @@
     return keys;
 }
 
-+ (NSArray *)getValuesFromObject:(id)object andKeys:(NSArray *)keys {
++ (NSMutableArray *)getValuesFromObject:(id)object andKeys:(NSMutableArray *)keys {
     NSMutableArray *values = [NSMutableArray array];
 
     for(NSString *key in keys) {
@@ -37,6 +37,14 @@
 
 + (id)getIdFromObject:(id)object {
     return [object valueForKey:PRIMARY_KEY];
+}
+
++ (NSString *)getType:(id)object {
+    if ([object isKindOfClass:[NSNumber class]]) {
+        return @"INTEGER";
+    }
+
+    return @"TEXT";
 }
 
 @end

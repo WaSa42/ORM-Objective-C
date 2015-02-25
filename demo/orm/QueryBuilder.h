@@ -1,9 +1,11 @@
 #import <Foundation/Foundation.h>
+#import "DataExtractor.h"
 
 #define SELECT      @"SELECT"
 #define ALL         @"*"
 #define FROM        @"FROM"
 #define INSERT      @"INSERT INTO"
+#define CREATE      @"CREATE TABLE IF NOT EXISTS"
 #define UPDATE      @"UPDATE"
 #define VALUES      @"VALUES"
 #define SET         @"SET"
@@ -26,7 +28,7 @@
     NSMutableString *query;
 }
 
-@property NSMutableString *query;
+@property (nonatomic) NSMutableString *query;
 
 - (instancetype)init;
 + (instancetype)instantiate;
@@ -39,6 +41,7 @@
 
 - (instancetype)from:(NSString *)table;
 - (instancetype)insertInto:(NSString *)table;
+- (instancetype)create:(NSString *)table withFields:(NSMutableArray *)fields andValues:(NSMutableArray *)values;
 - (instancetype)update:(NSString *)table;
 - (instancetype)values:(NSArray *)values;
 - (instancetype)set:(NSDictionary *)data;
@@ -48,7 +51,7 @@
 - (instancetype)andWhere:(NSString *)field;
 - (instancetype)orWhere:(NSString *)field;
 
-- (instancetype)is:(NSString *)value;
+- (instancetype)is:(id)value;
 - (instancetype)isNot:(NSString *)value;
 - (instancetype)isIn:(NSArray *)values;
 - (instancetype)isNotIn:(NSArray *)values;

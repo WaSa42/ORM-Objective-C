@@ -36,16 +36,25 @@ void demoQueryBuilder() {
 }
 
 void demoEntityManager() {
-    NSLog(@"DEMO ENTITY MANAGER :");
+    @try {
+        NSLog(@"DEMO ENTITY MANAGER :");
 
-    User *user = [User instantiateWithUsername:@"bob" andPassword:@"bob"];
-    EntityManager *em = [EntityManager instantiate];
+        User *user = [User instantiateWithUsername:@"bob2" andPassword:@"bob2"];
+        EntityManager *em = [EntityManager instantiate];
 
-    [em insert:user];
-    [em update:user];
-    [em remove:user];
+        [em insert:user];
+        [em flush];
 
-    [em flush];
+        user.username = @"new username!";
+        [em update:user];
+        [em flush];
 
-    NSLog(@"---");
+        //[em remove:user];
+
+        NSLog(@"---");
+    }
+
+    @catch (NSException *e) {
+        NSLog(@"Exception: %@", e);
+    }
 }
