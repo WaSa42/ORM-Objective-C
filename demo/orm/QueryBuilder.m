@@ -94,10 +94,10 @@
         if (first) {
             first = NO;
         } else {
-            [[self query] appendString:@", "];
+            [[self query] appendString:JOINER];
         }
 
-        [self spaceOut:[NSString stringWithFormat:FORMAT_AFFECT, [QueryBuilder wrap:key], [QueryBuilder wrap:data[key]]]];
+        [self spaceOut:[NSString stringWithFormat:FORMAT_AFFECT, key, [QueryBuilder wrap:data[key]]]];
     }
 
     return self;
@@ -118,14 +118,14 @@
 
 - (instancetype)andWhere:(NSString *)field {
     [self spaceOut:AND];
-    [self wrap:field];
+    [self spaceOut:field];
 
     return self;
 }
 
 - (instancetype)orWhere:(NSString *)field {
     [self spaceOut:OR];
-    [self wrap:field];
+    [self spaceOut:field];
 
     return self;
 }
@@ -146,14 +146,14 @@
 
 - (instancetype)isIn:(NSArray *)values {
     [self spaceOut:IN];
-    [self wrap:[values componentsJoinedByString:JOINER] withParenthesis:YES];
+    [self wrap:[[[self class] wrapValues:values] componentsJoinedByString:JOINER] withParenthesis:YES];
 
     return self;
 }
 
 - (instancetype)isNotIn:(NSArray *)values {
     [self spaceOut:NOT_IN];
-    [self wrap:[values componentsJoinedByString:JOINER] withParenthesis:YES];
+    [self wrap:[[[self class] wrapValues:values] componentsJoinedByString:JOINER] withParenthesis:YES];
 
     return self;
 }

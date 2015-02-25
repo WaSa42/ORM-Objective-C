@@ -6,6 +6,7 @@
 @interface DataExtractor : NSObject
 
 + (NSString *)getObjectName:(id)object;
++ (NSString *)getClassName:(Class)name;
 + (NSMutableArray *)getKeysFromObject:(id)object;
 + (NSMutableArray *)getValuesFromObject:(id)object andKeys:(NSMutableArray *)keys;
 + (id)getIdFromObject:(id)object;

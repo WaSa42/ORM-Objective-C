@@ -23,4 +23,6 @@
 - (void)remove:(id)anObject;
 - (void)flush;
 
+- (NSArray *)find:(Class)entityClass withCondition:(NSString *)condition;
+
 @end

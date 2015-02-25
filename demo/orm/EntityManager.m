@@ -35,23 +35,26 @@
 - (void)flush {
     QueryBuilder *qb = [QueryBuilder instantiate];
 
+    // For each managed entity
     for(ManagedEntity *managedEntity in managedEntities) {
-        if (managedEntity.action != ACTION_REMOVE) {
-            [qb create:[managedEntity table] withFields:[managedEntity keys] andValues:[managedEntity values]];
-            [self.databaseConnection execute:[qb query]];
-            [qb reset];
-        }
-
-        switch (managedEntity.action) {
+        switch ([managedEntity action]) {
             case ACTION_INSERT:
+                // Create table if not exists
+                [qb create:[managedEntity table] withFields:[managedEntity keys] andValues:[managedEntity values]];
+                [self.databaseConnection execute:[qb query]];
+                [qb reset];
+
+                // Generate the insert query
                 [[[qb insertInto:[managedEntity table]] fields:[managedEntity keys]] values:[managedEntity values]];
                 break;
 
             case ACTION_UPDATE:
+                // Generate the update query
                 [[[[qb update:[managedEntity table]] set:[managedEntity data]] where:PRIMARY_KEY] is:managedEntity.primaryKey];
                 break;
 
             case ACTION_REMOVE:
+                // Generate the delete query
                 [[[[qb delete] from:[managedEntity table]] where:PRIMARY_KEY] is:managedEntity.primaryKey];
                 break;
 
@@ -59,16 +62,29 @@
                 break;
         }
 
-        [self.databaseConnection execute:[qb query]];
+        // Execute the query (insert, update or remove)
+        [[self databaseConnection] execute:[qb query]];
         [qb reset];
-        
-        if (managedEntity.action == ACTION_INSERT) {
+
+        // Update the primary key if we have performed an insert
+        if ([managedEntity action] == ACTION_INSERT) {
             managedEntity.primaryKey = [[self databaseConnection] getLastInsertId];
             [[managedEntity object] setValue:managedEntity.primaryKey forKey:PRIMARY_KEY];
         }
     }
 
+    // Empty the managed entities list
     self.managedEntities = [NSMutableArray array];
+}
+
+- (NSArray *)find:(Class)entityClass withCondition:(NSString *)condition {
+    QueryBuilder *qb = [QueryBuilder instantiate];
+
+    // Generate the select query
+    [[[[qb select] all] from:[DataExtractor getClassName:entityClass]] spaceOut:condition];
+
+    // Execute the query and return the result
+    return [[self databaseConnection] getResultForQuery:[qb query] andClass:entityClass];
 }
 
 @end

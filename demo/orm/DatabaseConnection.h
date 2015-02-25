@@ -19,5 +19,6 @@
 
 - (void)execute:(NSString *)query;
 - (id)getLastInsertId;
+- (NSArray *)getResultForQuery:(NSMutableString *)query andClass:entityClass;
 
 @end

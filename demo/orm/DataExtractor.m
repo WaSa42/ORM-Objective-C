@@ -3,7 +3,11 @@
 @implementation DataExtractor
 
 + (NSString *)getObjectName:(id)object {
-    return [NSStringFromClass([object class]) lowercaseString];
+    return [self getClassName:[object class]];
+}
+
++ (NSString *)getClassName:(Class)name {
+    return [NSStringFromClass(name) lowercaseString];
 }
 
 + (NSMutableArray *)getKeysFromObject:(id)object {

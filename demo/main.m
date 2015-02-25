@@ -2,7 +2,12 @@
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
+        NSLog(@"DEMO QUERY BUILDER :");
         demoQueryBuilder();
+
+        NSLog(@"---");
+
+        NSLog(@"DEMO ENTITY MANAGER :");
         demoEntityManager();
     };
 
@@ -10,48 +15,62 @@ int main(int argc, const char * argv[]) {
 }
 
 void demoQueryBuilder() {
-    NSLog(@"DEMO QUERY BUILDER :");
-
     QueryBuilder *qb = [QueryBuilder instantiate];
 
-    [[[[[[[qb select] all] from:@"users"] where:@"username"] is:@"bob"] andWhere:@"password"] is:@"bob"];
+    [[[[[[[qb select] all] from:@"user"] where:@"username"] is:@"bob"] andWhere:@"password"] is:@"bob"];
     NSLog(@"query 1 : %@", [qb query]);
 
     [qb reset];
 
-    [[[[[qb select] fields:@[@"id", @"email", @"password"]] from:@"users"] where:@"username"] isNot:@"bob"];
+    [[[[[qb select] fields:@[@"id", @"email", @"password"]] from:@"user"] where:@"username"] isNot:@"bob"];
     NSLog(@"query 2 : %@", [qb query]);
 
     [qb reset];
 
-    [[[[[qb select] field:@"id"] from:@"users"] where:@"username"] isNotIn:@[@"bob11", @"joe22", @"john33"]];
+    [[[[[qb select] field:@"id"] from:@"user"] where:@"username"] isNotIn:@[@"bob11", @"joe22", @"john33"]];
     NSLog(@"query 3 : %@", [qb query]);
 
     [qb reset];
 
-    [[[[[[[qb select] all] from:@"users"] where:@"username"] is:@"bob"] orWhere:@"id"] isIn:@[@"1", @"2", @"3"]];
+    [[[[[[[qb select] all] from:@"user"] where:@"username"] is:@"bob"] orWhere:@"id"] isIn:@[@"1", @"2", @"3"]];
     NSLog(@"query 4 : %@", [qb query]);
-
-    NSLog(@"---");
 }
 
 void demoEntityManager() {
     @try {
-        NSLog(@"DEMO ENTITY MANAGER :");
-
-        User *user = [User instantiateWithUsername:@"bob2" andPassword:@"bob2"];
         EntityManager *em = [EntityManager instantiate];
+
+        // Insert :
+        NSLog(@"insert a user :");
+        User *user = [User instantiateWithUsername:@"bob" andPassword:@"bob"];
 
         [em insert:user];
         [em flush];
+        NSLog(@"user inserted, id = %li", [user id]);
 
-        user.username = @"new username!";
+        // Update :
+        user.username = @"new_username";
+
         [em update:user];
         [em flush];
+        NSLog(@"user updated");
 
-        //[em remove:user];
+        // Remove :
+        [em remove:user];
+        [em flush];
+        NSLog(@"user removed");
 
-        NSLog(@"---");
+        // Find :
+        QueryBuilder *qb = [QueryBuilder instantiate];
+        [[[[qb where:@"username"] is:@"bob"] orWhere:@"id"] isIn:@[@"1", @"2", @"3", @"4", @"5"]];
+
+        NSLog(@"find users :");
+        NSArray *results = [em find:[User class] withCondition: [qb query]];
+        NSLog(@"%lu results", [results count]);
+
+        for (User *result in results) {
+            NSLog(@"User #%li - username : %@", [result id], [result username]);
+        }
     }
 
     @catch (NSException *e) {
