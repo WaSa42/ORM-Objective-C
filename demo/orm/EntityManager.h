@@ -1,11 +1,10 @@
 #import <Foundation/Foundation.h>
 
+#import "Action.h"
 #import "DataExtractor.h"
 #import "ManagedEntity.h"
 #import "QueryBuilder.h"
 #import "DatabaseConnection.h"
-
-#define SEPARATOR @";"
 
 @interface EntityManager : NSObject {
     NSMutableArray *managedEntities;

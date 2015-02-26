@@ -20,6 +20,9 @@
 @property (nonatomic) id primaryKey;
 
 - (instancetype)initWithObject:(NSObject *)anObject andAction:(ActionType)anAction;
-+ (instancetype)objectWithObject:(NSObject *)anObject andAction:(ActionType)anAction;
++ (instancetype)instantiateWithObject:(NSObject *)anObject andAction:(ActionType)anAction;
+
+- (NSArray *)getColumnsDefinitions;
+- (NSArray *)getDependencies;
 
 @end

@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+
 #import "DataExtractor.h"
 
 #define SELECT      @"SELECT"
@@ -41,7 +42,7 @@
 
 - (instancetype)from:(NSString *)table;
 - (instancetype)insertInto:(NSString *)table;
-- (instancetype)create:(NSString *)table withFields:(NSMutableArray *)fields andValues:(NSMutableArray *)values;
+- (instancetype)create:(NSString *)table withColumns:(NSArray *)values;
 - (instancetype)update:(NSString *)table;
 - (instancetype)values:(NSArray *)values;
 - (instancetype)set:(NSDictionary *)data;

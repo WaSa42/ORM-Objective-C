@@ -2,6 +2,7 @@
 #import <objc/runtime.h>
 
 #define PRIMARY_KEY @"id"
+#define FOREIGN_KEY @"FOREIGN KEY"
 
 @interface DataExtractor : NSObject
 

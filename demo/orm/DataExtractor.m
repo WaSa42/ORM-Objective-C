@@ -15,7 +15,7 @@
     NSMutableArray *keys = [NSMutableArray array];
     objc_property_t *properties = class_copyPropertyList([object class], &totalProperties);
 
-    for(unsigned int i = 0; i < totalProperties; i++) {
+    for (unsigned int i = 0; i < totalProperties; i++) {
         objc_property_t currentProperty = properties[i];
         NSString *key = [NSString stringWithUTF8String:property_getName(currentProperty)];
 
@@ -32,7 +32,7 @@
 + (NSMutableArray *)getValuesFromObject:(id)object andKeys:(NSMutableArray *)keys {
     NSMutableArray *values = [NSMutableArray array];
 
-    for(NSString *key in keys) {
+    for (NSString *key in keys) {
         [values addObject:[object valueForKey:key]];
     }
 
@@ -44,11 +44,15 @@
 }
 
 + (NSString *)getType:(id)object {
+    if ([object isKindOfClass:[NSString class]]) {
+        return @"TEXT";
+    }
+
     if ([object isKindOfClass:[NSNumber class]]) {
         return @"INTEGER";
     }
 
-    return @"TEXT";
+    return FOREIGN_KEY;
 }
 
 @end

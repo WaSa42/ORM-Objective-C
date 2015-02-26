@@ -43,22 +43,23 @@ void demoEntityManager() {
         // Insert :
         NSLog(@"insert a user :");
         User *user = [User instantiateWithUsername:@"bob" andPassword:@"bob"];
+        user.profile = [Profile instantiateWithBiography:@"j'aime l'Objective C" andLocation:@"Lyon"];
 
         [em insert:user];
         [em flush];
         NSLog(@"user inserted, id = %li", [user id]);
 
         // Update :
-        user.username = @"new_username";
-
-        [em update:user];
-        [em flush];
-        NSLog(@"user updated");
+//        user.username = @"new_username";
+//
+//        [em update:user];
+//        [em flush];
+//        NSLog(@"user updated");
 
         // Remove :
-        [em remove:user];
-        [em flush];
-        NSLog(@"user removed");
+//        [em remove:user];
+//        [em flush];
+//        NSLog(@"user removed");
 
         // Find :
         QueryBuilder *qb = [QueryBuilder instantiate];

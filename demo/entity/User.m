@@ -5,6 +5,7 @@
 @synthesize id;
 @synthesize username;
 @synthesize password;
+@synthesize profile;
 
 - (instancetype)initWithUsername:(NSString *)aUsername andPassword:(NSString *)aPassword {
     self = [super init];

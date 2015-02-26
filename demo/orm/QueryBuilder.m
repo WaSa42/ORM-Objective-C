@@ -56,18 +56,10 @@
     return self;
 }
 
-- (instancetype)create:(NSString *)table withFields:(NSMutableArray *)fields andValues:(NSMutableArray *)values {
+- (instancetype)create:(NSString *)table withColumns:(NSArray *)values {
     [self spaceOut:CREATE];
     [self wrap:table];
-
-    NSMutableArray *definitions = [NSMutableArray array];
-    [definitions addObject:[NSString stringWithFormat:@"%@ INTEGER PRIMARY KEY AUTOINCREMENT", PRIMARY_KEY]];
-
-    for (unsigned int i = 0; i < [fields count]; i++) {
-        [definitions addObject:[NSString stringWithFormat:@"%@ %@", fields[i], [DataExtractor getType:values[i]]]];
-    }
-
-    [self wrap:[definitions componentsJoinedByString:JOINER] withParenthesis:YES];
+    [self wrap:[values componentsJoinedByString:JOINER] withParenthesis:YES];
 
     return self;
 }
@@ -91,6 +83,7 @@
     BOOL first = YES;
 
     for (NSString* key in data) {
+        // TODO: use componentsJoinedByString
         if (first) {
             first = NO;
         } else {

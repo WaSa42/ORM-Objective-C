@@ -14,6 +14,7 @@
 		17DB5B10A19E53EB70804D06 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DB51E14C44058D964623CC /* main.m */; };
 		17DB5BB53BBE3FC1DA1FAD77 /* DatabaseConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DB566CBDC4F2ED90A9ADED /* DatabaseConnection.m */; };
 		17DB5E3DAD19842F10C69F90 /* EntityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DB5FEB5FA7D250A345C1A8 /* EntityManager.m */; };
+		17DB5E505802BA596281C906 /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DB5CA2BEC7662DFCDE3B41 /* Profile.m */; };
 		17DB5FF93FB5CBA1BB0B229E /* ManagedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DB59EDBAFA0E1D9D85C706 /* ManagedEntity.m */; };
 		C4AB88F41A80473100988153 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 17DB5C3494526D5BA1478DD9 /* libsqlite3.dylib */; };
 /* End PBXBuildFile section */
@@ -41,9 +42,11 @@
 		17DB57FA2863B3A2E3177E4E /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		17DB586A715606D8114B5F46 /* ManagedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManagedEntity.h; sourceTree = "<group>"; };
 		17DB58790C045A92FDDD27AF /* Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Action.h; sourceTree = "<group>"; };
+		17DB58AB074DFB5AB9882078 /* Profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Profile.h; sourceTree = "<group>"; };
 		17DB59D1786C1042BAFE997F /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		17DB59EDBAFA0E1D9D85C706 /* ManagedEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManagedEntity.m; sourceTree = "<group>"; };
 		17DB5C3494526D5BA1478DD9 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		17DB5CA2BEC7662DFCDE3B41 /* Profile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Profile.m; sourceTree = "<group>"; };
 		17DB5CFBF46DFAB20C90CD64 /* EntityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityManager.h; sourceTree = "<group>"; };
 		17DB5D56EAA58EC512062CED /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
 		17DB5D74199C3B3BFBBD75A4 /* DataExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataExtractor.h; sourceTree = "<group>"; };
@@ -95,6 +98,8 @@
 			children = (
 				17DB57FA2863B3A2E3177E4E /* User.m */,
 				17DB59D1786C1042BAFE997F /* User.h */,
+				17DB5CA2BEC7662DFCDE3B41 /* Profile.m */,
+				17DB58AB074DFB5AB9882078 /* Profile.h */,
 			);
 			path = entity;
 			sourceTree = "<group>";
@@ -222,6 +227,7 @@
 				17DB5BB53BBE3FC1DA1FAD77 /* DatabaseConnection.m in Sources */,
 				17DB50F91C0EAD8AC4FB2CF2 /* DataExtractor.m in Sources */,
 				17DB534744FF75F97B3C8D89 /* QueryBuilder.m in Sources */,
+				17DB5E505802BA596281C906 /* Profile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
