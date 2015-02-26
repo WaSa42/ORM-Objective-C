@@ -24,4 +24,6 @@
 
 - (NSArray *)find:(Class)entityClass withCondition:(NSString *)condition;
 
+- (void)insertManagedEntity:(ManagedEntity *)managedEntity;
+
 @end

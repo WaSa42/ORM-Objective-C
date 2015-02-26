@@ -4,11 +4,6 @@
 
 @synthesize object;
 @synthesize action;
-@synthesize table;
-@synthesize data;
-@synthesize keys;
-@synthesize values;
-@synthesize primaryKey;
 
 - (instancetype)initWithObject:(NSObject *)anObject andAction:(ActionType)anAction {
     self = [super init];
@@ -16,23 +11,6 @@
     if (self) {
         self.object = anObject;
         self.action = anAction;
-        self.table = [DataExtractor getObjectName:[self object]];
-        self.data = [NSMutableDictionary dictionary];
-
-        if (self.action != ACTION_INSERT) {
-            self.primaryKey = [DataExtractor getIdFromObject:[self object]];
-        }
-
-        if (self.action != ACTION_REMOVE) {
-            self.keys = [DataExtractor getKeysFromObject:[self object]];
-            self.values = [DataExtractor getValuesFromObject:[self object] andKeys:[self keys]];
-        }
-
-        if (self.action == ACTION_UPDATE) {
-            for (unsigned int i = 0; i < [self.keys count]; i++) {
-                [self.data setValue:self.values[i] forKey:self.keys[i]];
-            }
-        }
     }
 
     return self;
@@ -42,39 +20,95 @@
     return [[self alloc] initWithObject:anObject andAction:anAction];
 }
 
-- (NSArray *)getColumnsDefinitions {
-    NSMutableArray *columns = [NSMutableArray array];
-
-    [columns addObject:[NSString stringWithFormat:@"%@ INTEGER PRIMARY KEY AUTOINCREMENT", PRIMARY_KEY]];
-
-    for (unsigned int i = 0; i < [[self keys] count]; i++) {
-        NSString *type = [DataExtractor getType:self.values[i]];
-
-        if ([type isEqualToString:FOREIGN_KEY]) {
-            [columns addObject:[NSString stringWithFormat:@"%@_%@ INTEGER", self.keys[i], PRIMARY_KEY]];
-            [columns addObject:[NSString stringWithFormat:@"FOREIGN KEY(%@_%@) REFERENCES %@(%@)", self.keys[i], PRIMARY_KEY, self.keys[i], PRIMARY_KEY]];
-        }
-
-        else {
-            [columns addObject:[NSString stringWithFormat:@"%@ %@", self.keys[i], type]];
-        }
-    }
-
-    return columns;
+- (NSString *)table {
+    return [DataExtractor getObjectName:[self object]];
 }
 
-- (NSArray *)getDependencies {
+- (id)primaryKey {
+    return [DataExtractor getIdFromObject:[self object]];
+}
+
+- (NSMutableArray *)keys {
+    return [DataExtractor getKeysFromObject:[self object]];
+}
+
+- (NSMutableArray *)values {
+    return [DataExtractor getValuesFromObject:[self object] andKeys:[self keys]];
+}
+
+- (NSMutableDictionary *)data {
+    NSMutableDictionary *data = [NSMutableDictionary dictionary];
+
+    NSMutableArray *keys = [self keys];
+    NSMutableArray *values = [self values];
+    NSUInteger total = [keys count];
+
+    for (unsigned int i = 0; i < total; i++) {
+        [data setValue:values[i] forKey:keys[i]];
+    }
+
+    return data;
+}
+
+- (NSArray *)dependenciesForAction:(enum ActionType)anAction {
     NSMutableArray *dependencies = [NSMutableArray array];
 
-    for (unsigned int i = 0; i < [[self keys] count]; i++) {
-        NSString *type = [DataExtractor getType:self.values[i]];
+    NSMutableArray *values = [self values];
+    NSUInteger total = [[self keys] count];
 
-        if ([type isEqualToString:FOREIGN_KEY]) {
-            [dependencies addObject:self.values[i]];
+    for (unsigned int i = 0; i < total; i++) {
+        if ([[DataExtractor getType:values[i]] isEqualToString:FOREIGN_KEY]) {
+            [dependencies addObject:[ManagedEntity instantiateWithObject:values[i] andAction:anAction]];
         }
     }
 
     return dependencies;
+}
+
+- (NSMutableArray *)columnsDefinitions {
+    NSMutableArray *definitions = [NSMutableArray array];
+
+    [definitions addObject:[NSString stringWithFormat:@"%@ INTEGER PRIMARY KEY AUTOINCREMENT", PRIMARY_KEY]];
+
+    NSMutableArray *keys = [self keys];
+    NSUInteger total = [keys count];
+
+    for (unsigned int i = 0; i < total; i++) {
+        NSString *type = [DataExtractor getType:self.values[i]];
+
+        if ([type isEqualToString:FOREIGN_KEY]) {
+            [definitions addObject:[NSString stringWithFormat:@"%@_%@ INTEGER", keys[i], PRIMARY_KEY]];
+            [definitions addObject:[NSString stringWithFormat:@"FOREIGN KEY(%1$@_%2$@) REFERENCES %1$@(%2$@)", keys[i], PRIMARY_KEY]];
+        }
+
+        else {
+            [definitions addObject:[NSString stringWithFormat:@"%@ %@", keys[i], type]];
+        }
+    }
+
+    return definitions;
+}
+
+- (NSMutableArray *)columnsNames {
+    NSMutableArray *names = [NSMutableArray array];
+
+    NSMutableArray *keys = [self keys];
+    NSMutableArray *values = [self values];
+    NSUInteger total = [keys count];
+
+    for (unsigned int i = 0; i < total; i++) {
+        NSString *type = [DataExtractor getType:values[i]];
+
+        if ([type isEqualToString:FOREIGN_KEY]) {
+            [names addObject:[NSString stringWithFormat:@"%@_%@", keys[i], PRIMARY_KEY]];
+        }
+
+        else {
+            [names addObject:[NSString stringWithFormat:@"%@", keys[i]]];
+        }
+    }
+
+    return names;
 }
 
 @end

@@ -43,7 +43,7 @@ void demoEntityManager() {
         // Insert :
         NSLog(@"insert a user :");
         User *user = [User instantiateWithUsername:@"bob" andPassword:@"bob"];
-        user.profile = [Profile instantiateWithBiography:@"j'aime l'Objective C" andLocation:@"Lyon"];
+        user.profile = [Profile instantiateWithBiography:@"#teamObjectiveC" andLocation:@"Lyon"];
 
         [em insert:user];
         [em flush];
@@ -62,16 +62,16 @@ void demoEntityManager() {
 //        NSLog(@"user removed");
 
         // Find :
-        QueryBuilder *qb = [QueryBuilder instantiate];
-        [[[[qb where:@"username"] is:@"bob"] orWhere:@"id"] isIn:@[@"1", @"2", @"3", @"4", @"5"]];
-
-        NSLog(@"find users :");
-        NSArray *results = [em find:[User class] withCondition: [qb query]];
-        NSLog(@"%lu results", [results count]);
-
-        for (User *result in results) {
-            NSLog(@"User #%li - username : %@", [result id], [result username]);
-        }
+//        QueryBuilder *qb = [QueryBuilder instantiate];
+//        [[[[qb where:@"username"] is:@"bob"] orWhere:@"id"] isIn:@[@"1", @"2", @"3", @"4", @"5"]];
+//
+//        NSLog(@"find users :");
+//        NSArray *results = [em find:[User class] withCondition: [qb query]];
+//        NSLog(@"%lu results", [results count]);
+//
+//        for (User *result in results) {
+//            NSLog(@"User #%li - username : %@", [result id], [result username]);
+//        }
     }
 
     @catch (NSException *e) {

@@ -55,4 +55,20 @@
     return FOREIGN_KEY;
 }
 
++ (NSMutableArray *)getColumnsValuesFromObject:(id)object andKeys:(NSMutableArray *)keys {
+    NSMutableArray *values = [NSMutableArray array];
+
+    for (NSString *key in keys) {
+        if ([[self getType:[object valueForKey:key]] isEqualToString:FOREIGN_KEY]) {
+            [values addObject:[self getIdFromObject:[object valueForKey:key]]];
+        }
+
+        else {
+            [values addObject:[object valueForKey:key]];
+        }
+    }
+
+    return values;
+}
+
 @end
