@@ -50,11 +50,11 @@ void demoEntityManager() {
         NSLog(@"user inserted, id = %li", [user id]);
 
         // Update :
-//        user.username = @"new_username";
-//
-//        [em update:user];
-//        [em flush];
-//        NSLog(@"user updated");
+        user.username = @"new_username";
+
+        [em update:user];
+        [em flush];
+        NSLog(@"user updated");
 
         // Remove :
 //        [em remove:user];

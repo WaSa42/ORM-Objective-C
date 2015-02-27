@@ -40,11 +40,12 @@
     NSMutableDictionary *data = [NSMutableDictionary dictionary];
 
     NSMutableArray *keys = [self keys];
-    NSMutableArray *values = [self values];
+    NSMutableArray *columns = [self columnsNames];
+    NSMutableArray *values = [DataExtractor getColumnsValuesFromObject:[self object] andKeys:keys];
     NSUInteger total = [keys count];
 
     for (unsigned int i = 0; i < total; i++) {
-        [data setValue:values[i] forKey:keys[i]];
+        [data setValue:values[i] forKey:columns[i]];
     }
 
     return data;

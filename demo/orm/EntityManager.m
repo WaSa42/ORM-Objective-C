@@ -41,8 +41,7 @@
                 break;
 
             case ACTION_UPDATE:
-                // Generate the update query
-//                [[[[qb update:[managedEntity table]] set:[managedEntity data]] where:PRIMARY_KEY] is:managedEntity.primaryKey];
+                [self updateManagedEntity:managedEntity];
                 break;
 
             case ACTION_REMOVE:
@@ -71,9 +70,9 @@
 
 - (void)insertManagedEntity:(ManagedEntity *)managedEntity {
     QueryBuilder *qb = [QueryBuilder instantiate];
+    NSMutableArray *entities = [@[managedEntity] mutableCopy];
 
     // Create tables
-    NSMutableArray *entities = [@[managedEntity] mutableCopy];
     NSMutableArray *queries = [NSMutableArray array];
     NSUInteger i = 0;
 
@@ -106,6 +105,33 @@
         [qb reset];
 
         [[entity object] setValue:[[self databaseConnection] getLastInsertId] forKey:PRIMARY_KEY];
+    }
+}
+
+- (void)updateManagedEntity:(ManagedEntity *)managedEntity {
+    QueryBuilder *qb = [QueryBuilder instantiate];
+    NSMutableArray *entities = [@[managedEntity] mutableCopy];
+
+    // Update values
+    NSUInteger i = 0;
+
+    while (i < [entities count]) {
+        NSArray *dependencies = [entities[i] dependenciesForAction:ACTION_INSERT];
+
+        for (ManagedEntity *dependency in dependencies) {
+            if (![entities containsObject:dependency]) {
+                [entities addObject:dependency];
+            }
+        }
+
+        i++;
+    }
+
+    for (ManagedEntity *entity in [entities reverseObjectEnumerator]) {
+        [[[[qb update:[entity table]] set:[entity data]] where:PRIMARY_KEY] is:entity.primaryKey];
+
+        [[self databaseConnection] execute:[qb query]];
+        [qb reset];
     }
 }
 
