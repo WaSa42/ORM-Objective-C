@@ -7,8 +7,18 @@
 @synthesize password;
 @synthesize profile;
 
-- (instancetype)initWithUsername:(NSString *)aUsername andPassword:(NSString *)aPassword {
+- (instancetype)init {
     self = [super init];
+
+    if (self) {
+        self.profile = [Profile instantiateWithBiography:@"" andLocation:@""];
+    }
+
+    return self;
+}
+
+- (instancetype)initWithUsername:(NSString *)aUsername andPassword:(NSString *)aPassword {
+    self = [self init];
 
     if (self) {
         self.username = aUsername;

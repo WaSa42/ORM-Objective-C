@@ -5,3 +5,4 @@
 
 void demoQueryBuilder();
 void demoEntityManager();
+void waitForEnter();

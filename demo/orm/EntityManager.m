@@ -57,21 +57,11 @@
     self.managedEntities = [NSMutableArray array];
 }
 
-- (NSArray *)find:(Class)entityClass withCondition:(NSString *)condition {
-    QueryBuilder *qb = [QueryBuilder instantiate];
-
-    // Generate the select query
-    [[[[qb select] all] from:[DataExtractor getClassName:entityClass]] spaceOut:condition];
-
-    // Execute the query and return the result
-    return [[self databaseConnection] getResultForQuery:[qb query] andClass:entityClass];
-}
-
 - (void)insertManagedEntity:(ManagedEntity *)managedEntity {
     QueryBuilder *qb = [QueryBuilder instantiate];
     NSMutableArray *entities = [@[managedEntity] mutableCopy];
 
-    // Create tables
+    // Find dependencies
     NSMutableArray *queries = [NSMutableArray array];
     NSUInteger i = 0;
 
@@ -93,6 +83,7 @@
         i++;
     }
 
+    // Create tables
     for (NSString *query in [queries reverseObjectEnumerator]) {
         [[self databaseConnection] execute:query];
     }
@@ -111,7 +102,7 @@
     QueryBuilder *qb = [QueryBuilder instantiate];
     NSMutableArray *entities = [@[managedEntity] mutableCopy];
 
-    // Update values
+    // Find dependencies
     NSUInteger i = 0;
 
     while (i < [entities count]) {
@@ -126,6 +117,7 @@
         i++;
     }
 
+    // Update values
     for (ManagedEntity *entity in [entities reverseObjectEnumerator]) {
         [[[[qb update:[entity table]] set:[entity data]] where:PRIMARY_KEY] is:entity.primaryKey];
 
@@ -138,7 +130,7 @@
     QueryBuilder *qb = [QueryBuilder instantiate];
     NSMutableArray *entities = [@[managedEntity] mutableCopy];
 
-    // Remove values
+    // Find dependencies
     NSUInteger i = 0;
 
     while (i < [entities count]) {
@@ -153,11 +145,52 @@
         i++;
     }
 
+    // Remove values
     for (ManagedEntity *entity in [entities reverseObjectEnumerator]) {
         [[[[qb delete] from:[entity table]] where:PRIMARY_KEY] is:entity.primaryKey];
         [[self databaseConnection] execute:[qb query]];
         [qb reset];
     }
+}
+
+- (NSArray *)find:(Class)entityClass withCondition:(NSString *)condition {
+    QueryBuilder *qb = [QueryBuilder instantiate];
+
+    // Generate the select query
+    [[[[qb select] all] from:[DataExtractor getClassName:entityClass]] spaceOut:condition];
+
+    // Execute the query and return the result
+    NSArray *results = [[self databaseConnection] getResultForQuery:[qb query]];
+    [qb reset];
+
+    NSMutableArray *entities = [NSMutableArray array];
+    NSString* suffix = [NSString stringWithFormat:@"_%@", PRIMARY_KEY];
+
+    for (NSDictionary *result in results) {
+        id entity = [[entityClass alloc] init];
+
+        for (NSString *key in [result allKeys]) {
+            id value = [result valueForKey:key];
+
+            if ([key hasSuffix:suffix]) {
+                NSString *dependencyName = [key stringByReplacingOccurrencesOfString:suffix withString:@""];
+                Class dependencyClass = [[entity valueForKey:dependencyName] class];
+
+                NSArray *dependency = [self find:dependencyClass withCondition:[[[qb where:PRIMARY_KEY] is:value] query]];
+                [qb reset];
+
+                [entity setValue:dependency[0] forKey:dependencyName];
+            }
+
+            else {
+                [entity setValue:value forKey:key];
+            }
+        }
+
+        [entities addObject:entity];
+    }
+
+    return entities;
 }
 
 @end

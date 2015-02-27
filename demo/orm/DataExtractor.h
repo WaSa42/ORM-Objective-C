@@ -1,9 +1,8 @@
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
 
-#define PRIMARY_KEY         @"id"
-#define FOREIGN_KEY         @"FOREIGN KEY"
-#define FOREIGN_KEY_SUFFIX  @"_id"
+#define PRIMARY_KEY @"id"
+#define FOREIGN_KEY @"FOREIGN KEY"
 
 @interface DataExtractor : NSObject
 

@@ -22,10 +22,10 @@
 - (void)remove:(id)anObject;
 - (void)flush;
 
-- (NSArray *)find:(Class)entityClass withCondition:(NSString *)condition;
-
 - (void)insertManagedEntity:(ManagedEntity *)managedEntity;
 - (void)updateManagedEntity:(ManagedEntity *)managedEntity;
 - (void)removeManagedEntity:(ManagedEntity *)managedEntity;
+
+- (NSArray *)find:(Class)entityClass withCondition:(NSString *)condition;
 
 @end

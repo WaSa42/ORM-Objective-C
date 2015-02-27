@@ -47,7 +47,8 @@ void demoEntityManager() {
 
         [em insert:user];
         [em flush];
-        NSLog(@"user inserted, id = %li", [user id]);
+        NSLog(@"user inserted : id = %li, profile id = %li", [user id], [[user profile] id]);
+        waitForEnter();
 
         // Update :
         user.username = @"new_username";
@@ -55,26 +56,33 @@ void demoEntityManager() {
         [em update:user];
         [em flush];
         NSLog(@"user updated");
+        waitForEnter();
 
         // Remove :
         [em remove:user];
         [em flush];
         NSLog(@"user removed");
+        waitForEnter();
 
         // Find :
-//        QueryBuilder *qb = [QueryBuilder instantiate];
-//        [[[[qb where:@"username"] is:@"bob"] orWhere:@"id"] isIn:@[@"1", @"2", @"3", @"4", @"5"]];
-//
-//        NSLog(@"find users :");
-//        NSArray *results = [em find:[User class] withCondition: [qb query]];
-//        NSLog(@"%lu results", [results count]);
-//
-//        for (User *result in results) {
-//            NSLog(@"User #%li - username : %@", [result id], [result username]);
-//        }
+        QueryBuilder *qb = [QueryBuilder instantiate];
+        [[[[qb where:@"username"] is:@"bob"] orWhere:@"id"] isIn:@[@"1", @"2", @"3", @"4", @"5"]];
+
+        NSLog(@"find users :");
+        NSArray *results = [em find:[User class] withCondition:[qb query]];
+        NSLog(@"%lu results", [results count]);
+
+        for (User *result in results) {
+            NSLog(@"User id = %li, username = %@, profile id = %li", [result id], [result username], [[result profile] id]);
+        }
     }
 
     @catch (NSException *e) {
         NSLog(@"Exception: %@", e);
     }
+}
+
+void waitForEnter() {
+    NSLog(@"Press enter to continue... ");
+    while(getchar() != '\n');
 }
