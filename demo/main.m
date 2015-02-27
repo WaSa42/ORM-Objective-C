@@ -57,9 +57,9 @@ void demoEntityManager() {
         NSLog(@"user updated");
 
         // Remove :
-//        [em remove:user];
-//        [em flush];
-//        NSLog(@"user removed");
+        [em remove:user];
+        [em flush];
+        NSLog(@"user removed");
 
         // Find :
 //        QueryBuilder *qb = [QueryBuilder instantiate];

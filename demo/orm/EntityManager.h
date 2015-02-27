@@ -26,5 +26,6 @@
 
 - (void)insertManagedEntity:(ManagedEntity *)managedEntity;
 - (void)updateManagedEntity:(ManagedEntity *)managedEntity;
+- (void)removeManagedEntity:(ManagedEntity *)managedEntity;
 
 @end

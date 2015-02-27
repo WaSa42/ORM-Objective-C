@@ -45,8 +45,7 @@
                 break;
 
             case ACTION_REMOVE:
-                // Generate the delete query
-//                [[[[qb delete] from:[managedEntity table]] where:PRIMARY_KEY] is:managedEntity.primaryKey];
+                [self removeManagedEntity:managedEntity];
                 break;
 
             default:
@@ -130,6 +129,32 @@
     for (ManagedEntity *entity in [entities reverseObjectEnumerator]) {
         [[[[qb update:[entity table]] set:[entity data]] where:PRIMARY_KEY] is:entity.primaryKey];
 
+        [[self databaseConnection] execute:[qb query]];
+        [qb reset];
+    }
+}
+
+- (void)removeManagedEntity:(ManagedEntity *)managedEntity {
+    QueryBuilder *qb = [QueryBuilder instantiate];
+    NSMutableArray *entities = [@[managedEntity] mutableCopy];
+
+    // Remove values
+    NSUInteger i = 0;
+
+    while (i < [entities count]) {
+        NSArray *dependencies = [entities[i] dependenciesForAction:ACTION_INSERT];
+
+        for (ManagedEntity *dependency in dependencies) {
+            if (![entities containsObject:dependency]) {
+                [entities addObject:dependency];
+            }
+        }
+
+        i++;
+    }
+
+    for (ManagedEntity *entity in [entities reverseObjectEnumerator]) {
+        [[[[qb delete] from:[entity table]] where:PRIMARY_KEY] is:entity.primaryKey];
         [[self databaseConnection] execute:[qb query]];
         [qb reset];
     }
