@@ -57,6 +57,7 @@
 /* Begin PBXFileReference section */
 		17DB544D52EEA89E00F14409 /* Article.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Article.h; sourceTree = "<group>"; };
 		17DB550414FF0BB59B146C90 /* MySQLDatabaseConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySQLDatabaseConnection.h; sourceTree = "<group>"; };
+		17DB5563507178DA9D7AB97E /* database.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file.sqlite; path = database.sqlite; sourceTree = "<group>"; };
 		17DB567DDA21488EC657845C /* MySQLDatabaseConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySQLDatabaseConnection.m; sourceTree = "<group>"; };
 		17DB5787070B3A8E1D2C90B3 /* DatabaseConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseConnection.h; sourceTree = "<group>"; };
 		17DB5DD6C1382999760C0063 /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Article.m; sourceTree = "<group>"; };
@@ -108,6 +109,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		17DB500E3C71B6B2B107E6B3 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				17DB5563507178DA9D7AB97E /* database.sqlite */,
+			);
+			path = resources;
+			sourceTree = SOURCE_ROOT;
+		};
 		C40018B71AA138C60066465F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				C40A3A581AA151DB008E383B /* mysql */,
+				17DB500E3C71B6B2B107E6B3 /* resources */,
 			);
 			name = includes;
 			sourceTree = "<group>";

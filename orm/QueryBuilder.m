@@ -83,7 +83,6 @@
     BOOL first = YES;
 
     for (NSString* key in data) {
-        // TODO: use componentsJoinedByString
         if (first) {
             first = NO;
         } else {

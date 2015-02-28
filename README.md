@@ -4,6 +4,7 @@
 SUPINFO B.Sc. – ORM
 
 Each arrow means "use". For instance, the "EntityManager" uses the "QueryBuilder".
+
 ![Schema](doc/schema.png)
 
 ### Group members
