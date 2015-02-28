@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
+#import "mysql/mysql.h"
 
 @interface DatabaseConnection : NSObject {
     sqlite3 *database;
