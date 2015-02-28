@@ -26,12 +26,8 @@
     return [[self alloc] initWithConnector:connector andParameters:parameters];
 }
 
-- (void)insert:(id)anObject {
-    [self.managedEntities addObject:[ManagedEntity instantiateWithObject:anObject andAction:ACTION_INSERT]];
-}
-
-- (void)update:(id)anObject {
-    [self.managedEntities addObject:[ManagedEntity instantiateWithObject:anObject andAction:ACTION_UPDATE]];
+- (void)persist:(id)anObject {
+    [self.managedEntities addObject:[ManagedEntity instantiateWithObject:anObject andAction:ACTION_PERSIST]];
 }
 
 - (void)remove:(id)anObject {
@@ -42,12 +38,8 @@
     // For each managed entity
     for(ManagedEntity *managedEntity in self.managedEntities) {
         switch ([managedEntity action]) {
-            case ACTION_INSERT:
-                [self insertManagedEntity:managedEntity];
-                break;
-
-            case ACTION_UPDATE:
-                [self updateManagedEntity:managedEntity];
+            case ACTION_PERSIST:
+                [self persistManagedEntity:managedEntity];
                 break;
 
             case ACTION_REMOVE:
@@ -63,25 +55,41 @@
     self.managedEntities = [NSMutableArray array];
 }
 
-- (void)insertManagedEntity:(ManagedEntity *)managedEntity {
+- (void)persistManagedEntity:(ManagedEntity *)managedEntity {
     QueryBuilder *qb = [QueryBuilder instantiate];
     NSMutableArray *entities = [@[managedEntity] mutableCopy];
+    NSMutableArray *tables = [NSMutableArray array];
 
     // Find dependencies
     NSMutableArray *queries = [NSMutableArray array];
     NSUInteger i = 0;
 
     while (i < [entities count]) {
-        NSArray *columns = [entities[i] columnsDefinitionsWithConnector:self.databaseConnection];
+        // Generate CREATE TABLE query
+        if (![tables containsObject:[entities[i] table]]) {
+            NSArray *columns = [entities[i] columnsDefinitionsWithConnector:self.databaseConnection];
 
-        [qb create:[entities[i] table] withColumns:columns];
-        [queries addObject:[qb query]];
-        [qb reset];
+            [qb create:[entities[i] table] withColumns:columns];
+            [queries addObject:[qb query]];
+            [qb reset];
 
-        NSArray *dependencies = [entities[i] dependenciesForAction:ACTION_INSERT];
+            [tables addObject:[entities[i] table]];
+        }
+
+        // Find dependencies
+        NSArray *dependencies = [entities[i] dependenciesForAction:ACTION_PERSIST];
 
         for (ManagedEntity *dependency in dependencies) {
-            if (![entities containsObject:dependency]) {
+            BOOL new = YES;
+
+            for (ManagedEntity *entity in entities) {
+                if ([dependency object] == [entity object]) {
+                    new = NO;
+                    break;
+                }
+            }
+
+            if (new) {
                 [entities addObject:dependency];
             }
         }
@@ -94,41 +102,35 @@
         [[self databaseConnection] execute:query];
     }
 
-    // Insert values
-    for (ManagedEntity *entity in [entities reverseObjectEnumerator]) {
-        [[[qb insertInto:[entity table]] fields:[entity columnsNames]] values:[DataExtractor getColumnsValuesFromObject:[entity object] andKeys:[entity keys]]];
-        [[self databaseConnection] execute:[qb query]];
-        [qb reset];
+    // Sort entities
+    NSArray *sortedEntities;
 
-        [[entity object] setValue:[[self databaseConnection] getLastInsertId] forKey:PRIMARY_KEY];
-    }
-}
+    sortedEntities = [entities sortedArrayUsingComparator:^NSComparisonResult(ManagedEntity *a, ManagedEntity *b) {
+        return (NSComparisonResult) ([a priority] < [b priority]);
+    }];
 
-- (void)updateManagedEntity:(ManagedEntity *)managedEntity {
-    QueryBuilder *qb = [QueryBuilder instantiate];
-    NSMutableArray *entities = [@[managedEntity] mutableCopy];
+    // Persist entities
+    for (ManagedEntity *entity in sortedEntities) {
+        BOOL insert = [[NSString stringWithFormat:@"%@", [entity primaryKey]] isEqualToString:@"0"];
 
-    // Find dependencies
-    NSUInteger i = 0;
-
-    while (i < [entities count]) {
-        NSArray *dependencies = [entities[i] dependenciesForAction:ACTION_INSERT];
-
-        for (ManagedEntity *dependency in dependencies) {
-            if (![entities containsObject:dependency]) {
-                [entities addObject:dependency];
-            }
+        // Generate INSERT query
+        if (insert) {
+            [[[qb insertInto:[entity table]] fields:[entity columnsNames]] values:[entity valuesWithRelations]];
         }
 
-        i++;
-    }
+        // Generate UPDATE query
+        else {
+            [[[[qb update:[entity table]] set:[entity data]] where:PRIMARY_KEY] is:entity.primaryKey];
+        }
 
-    // Update values
-    for (ManagedEntity *entity in [entities reverseObjectEnumerator]) {
-        [[[[qb update:[entity table]] set:[entity data]] where:PRIMARY_KEY] is:entity.primaryKey];
-
+        // Execute the query
         [[self databaseConnection] execute:[qb query]];
         [qb reset];
+
+        // Update the primary key
+        if (insert) {
+            [[entity object] setValue:[[self databaseConnection] getLastInsertId] forKey:PRIMARY_KEY];
+        }
     }
 }
 
@@ -140,10 +142,19 @@
     NSUInteger i = 0;
 
     while (i < [entities count]) {
-        NSArray *dependencies = [entities[i] dependenciesForAction:ACTION_INSERT];
+        NSArray *dependencies = [entities[i] dependenciesForAction:ACTION_REMOVE];
 
         for (ManagedEntity *dependency in dependencies) {
-            if (![entities containsObject:dependency]) {
+            BOOL new = YES;
+
+            for (ManagedEntity *entity in entities) {
+                if ([dependency object] == [entity object]) {
+                    new = NO;
+                    break;
+                }
+            }
+
+            if (new) {
                 [entities addObject:dependency];
             }
         }
@@ -151,8 +162,15 @@
         i++;
     }
 
+    // Sort entities
+    NSArray *sortedEntities;
+
+    sortedEntities = [entities sortedArrayUsingComparator:^NSComparisonResult(ManagedEntity *a, ManagedEntity *b) {
+        return (NSComparisonResult) ([a priority] > [b priority]);
+    }];
+
     // Remove values
-    for (ManagedEntity *entity in entities) {
+    for (ManagedEntity *entity in sortedEntities) {
         [[[[qb delete] from:[entity table]] where:PRIMARY_KEY] is:entity.primaryKey];
         [[self databaseConnection] execute:[qb query]];
         [qb reset];

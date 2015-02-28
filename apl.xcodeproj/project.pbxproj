@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		17DB519A1D8DA3FB57749C58 /* DatabaseConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 17DB5787070B3A8E1D2C90B3 /* DatabaseConnection.h */; };
 		17DB568B75E0610364FC5DE0 /* MySQLDatabaseConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DB567DDA21488EC657845C /* MySQLDatabaseConnection.m */; };
+		17DB58A8AE728DDFC445610E /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DB5DD6C1382999760C0063 /* Article.m */; };
 		17DB5B9A3AB874A605EBB9A0 /* MySQLDatabaseConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 17DB550414FF0BB59B146C90 /* MySQLDatabaseConnection.h */; };
 		C40018B61AA138BA0066465F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C40018B51AA138BA0066465F /* libsqlite3.dylib */; };
 		C40018B91AA13BDD0066465F /* liborm.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C40FD3121AA11254001BDF88 /* liborm.dylib */; };
@@ -54,9 +55,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		17DB544D52EEA89E00F14409 /* Article.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Article.h; sourceTree = "<group>"; };
 		17DB550414FF0BB59B146C90 /* MySQLDatabaseConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySQLDatabaseConnection.h; sourceTree = "<group>"; };
 		17DB567DDA21488EC657845C /* MySQLDatabaseConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySQLDatabaseConnection.m; sourceTree = "<group>"; };
 		17DB5787070B3A8E1D2C90B3 /* DatabaseConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseConnection.h; sourceTree = "<group>"; };
+		17DB5DD6C1382999760C0063 /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Article.m; sourceTree = "<group>"; };
 		C40018B51AA138BA0066465F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		C40A3A4E1AA14ADD008E383B /* Profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Profile.h; sourceTree = "<group>"; };
 		C40A3A4F1AA14ADD008E383B /* Profile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Profile.m; sourceTree = "<group>"; };
@@ -129,6 +132,8 @@
 				C40A3A4F1AA14ADD008E383B /* Profile.m */,
 				C40A3A501AA14ADD008E383B /* User.h */,
 				C40A3A511AA14ADD008E383B /* User.m */,
+				17DB5DD6C1382999760C0063 /* Article.m */,
+				17DB544D52EEA89E00F14409 /* Article.h */,
 			);
 			name = entity;
 			path = demo/entity;
@@ -309,6 +314,7 @@
 				C40A3A531AA14ADD008E383B /* User.m in Sources */,
 				C40FD3531AA114CC001BDF88 /* main.m in Sources */,
 				C40A3A521AA14ADD008E383B /* Profile.m in Sources */,
+				17DB58A8AE728DDFC445610E /* Article.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

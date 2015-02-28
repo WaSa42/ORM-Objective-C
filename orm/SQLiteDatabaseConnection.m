@@ -45,7 +45,7 @@
 
 - (void)execute:(NSString *)query {
     // Log the query
-    NSLog(@"executing query : %@", query);
+    NSLog(@"%@", query);
     int code;
 
     // Create the statement
@@ -63,7 +63,6 @@
 
     // Remove the statement
     sqlite3_finalize(stmt);
-    NSLog(@"query executed");
 }
 
 - (id)getLastInsertId {
@@ -72,7 +71,7 @@
 
 - (NSArray *)getResultForQuery:(NSMutableString *)query {
     // Log the query
-    NSLog(@"executing query : %@", query);
+    NSLog(@"%@", query);
     int code;
 
     // Create the results array and the statement
@@ -105,7 +104,6 @@
 
     // Remove the statement
     sqlite3_finalize(stmt);
-    NSLog(@"query executed");
 
     // Return the results
     return results;

@@ -60,7 +60,14 @@ void demoEntityManager() {
         User *user = [User instantiateWithUsername:@"bob" andPassword:@"bob"];
         user.profile = [Profile instantiateWithBiography:@"#teamObjectiveC" andLocation:@"Lyon"];
 
-        [em insert:user];
+        for (NSUInteger i = 0; i < 3; i++) {
+            Article *article = [Article instantiateWithTitle:[NSString stringWithFormat:@"Article %lu !", i]];
+            [article setUser:user];
+
+            [[user articles] addObject:article];
+        }
+
+        [em persist:user];
         [em flush];
         NSLog(@"user inserted : id = %li, profile id = %li", [user id], [[user profile] id]);
         waitForEnter();
@@ -68,7 +75,7 @@ void demoEntityManager() {
         // Update :
         user.username = @"new_username";
 
-        [em update:user];
+        [em persist:user];
         [em flush];
         NSLog(@"user updated");
         waitForEnter();

@@ -52,6 +52,10 @@
         return @"INTEGER";
     }
 
+    if ([object isKindOfClass:[NSMutableArray class]]) {
+        return INVERSED;
+    }
+
     return FOREIGN_KEY;
 }
 
@@ -59,7 +63,15 @@
     NSMutableArray *values = [NSMutableArray array];
 
     for (NSString *key in keys) {
-        if ([[self getType:[object valueForKey:key]] isEqualToString:FOREIGN_KEY]) {
+        NSString *type = [self getType:[object valueForKey:key]];
+
+        // OneToMany
+        if ([type isEqualToString:INVERSED]) {
+            continue;
+        }
+
+        // OneToOne or ManyToOne
+        if ([type isEqualToString:FOREIGN_KEY]) {
             [values addObject:[self getIdFromObject:[object valueForKey:key]]];
         }
 

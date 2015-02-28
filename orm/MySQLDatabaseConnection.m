@@ -53,7 +53,7 @@
 
 - (void)execute:(NSString *)query {
     // Log the query
-    NSLog(@"executing query : %@", query);
+    NSLog(@"%@", query);
 
     // Create the statement
     MYSQL_STMT *stmt;
@@ -74,7 +74,6 @@
 
     // Remove the statement
     mysql_stmt_close(stmt);
-    NSLog(@"query executed");
 }
 
 - (id)getLastInsertId {
@@ -83,7 +82,7 @@
 
 - (NSArray *)getResultForQuery:(NSMutableString *)query {
     // Log the query
-    NSLog(@"executing query : %@", query);
+    NSLog(@"%@", query);
 
     if (mysql_query(self.database, query.UTF8String)) {
         [NSException raise:@"Invalid query" format:@"Error %d : %@", mysql_errno(self.database), [NSString stringWithUTF8String:mysql_error(self.database)]];
@@ -122,8 +121,6 @@
 
         mysql_free_result(mysqlResult);
     }
-
-    NSLog(@"query executed");
 
     // Return the results
     return results;

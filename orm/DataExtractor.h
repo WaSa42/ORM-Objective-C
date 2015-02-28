@@ -3,6 +3,7 @@
 
 #define PRIMARY_KEY @"id"
 #define FOREIGN_KEY @"FOREIGN KEY"
+#define INVERSED    @"INVERSED"
 
 @interface DataExtractor : NSObject
 

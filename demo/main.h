@@ -5,6 +5,7 @@
 #import "MySQLDatabaseConnection.h"
 #import "User.h"
 #import "Profile.h"
+#import "Article.h"
 
 void demoQueryBuilder();
 void demoEntityManager();

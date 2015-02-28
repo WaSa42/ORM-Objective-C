@@ -19,13 +19,11 @@
 - (instancetype)initWithConnector:(Class)connector andParameters:(NSMutableDictionary *)parameters;
 + (instancetype)instantiateWithConnector:(Class)connector andParameters:(NSMutableDictionary *)parameters;
 
-- (void)insert:(id)anObject;
-- (void)update:(id)anObject;
+- (void)persist:(id)anObject;
 - (void)remove:(id)anObject;
 - (void)flush;
 
-- (void)insertManagedEntity:(ManagedEntity *)managedEntity;
-- (void)updateManagedEntity:(ManagedEntity *)managedEntity;
+- (void)persistManagedEntity:(ManagedEntity *)managedEntity;
 - (void)removeManagedEntity:(ManagedEntity *)managedEntity;
 
 - (NSArray *)find:(Class)entityClass withCondition:(NSString *)condition;

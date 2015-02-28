@@ -6,12 +6,14 @@
 @synthesize username;
 @synthesize password;
 @synthesize profile;
+@synthesize articles;
 
 - (instancetype)init {
     self = [super init];
 
     if (self) {
         self.profile = [Profile instantiateWithBiography:@"" andLocation:@""];
+        self.articles = [NSMutableArray array];
     }
 
     return self;
