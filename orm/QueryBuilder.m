@@ -37,28 +37,28 @@
 }
 
 - (instancetype)fields:(NSArray *)fields {
-    [self wrap:[[[self class] wrapValues:fields] componentsJoinedByString:JOINER] withParenthesis:YES];
+    [self wrap:[fields componentsJoinedByString:JOINER] withParenthesis:YES];
 
     return self;
 }
 
 - (instancetype)from:(NSString *)table {
     [self spaceOut:FROM];
-    [self wrap:table];
+    [self spaceOut:table];
 
     return self;
 }
 
 - (instancetype)insertInto:(NSString *)table {
     [self spaceOut:INSERT];
-    [self wrap:table];
+    [self spaceOut:table];
 
     return self;
 }
 
 - (instancetype)create:(NSString *)table withColumns:(NSArray *)values {
     [self spaceOut:CREATE];
-    [self wrap:table];
+    [self spaceOut:table];
     [self wrap:[values componentsJoinedByString:JOINER] withParenthesis:YES];
 
     return self;
@@ -66,7 +66,7 @@
 
 - (instancetype)update:(NSString *)table {
     [self spaceOut:UPDATE];
-    [self wrap:table];
+    [self spaceOut:table];
 
     return self;
 }

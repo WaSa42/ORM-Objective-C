@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17DB519A1D8DA3FB57749C58 /* DatabaseConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 17DB5787070B3A8E1D2C90B3 /* DatabaseConnection.h */; };
+		17DB568B75E0610364FC5DE0 /* MySQLDatabaseConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DB567DDA21488EC657845C /* MySQLDatabaseConnection.m */; };
+		17DB5B9A3AB874A605EBB9A0 /* MySQLDatabaseConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 17DB550414FF0BB59B146C90 /* MySQLDatabaseConnection.h */; };
 		C40018B61AA138BA0066465F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C40018B51AA138BA0066465F /* libsqlite3.dylib */; };
 		C40018B91AA13BDD0066465F /* liborm.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C40FD3121AA11254001BDF88 /* liborm.dylib */; };
 		C40A3A521AA14ADD008E383B /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = C40A3A4F1AA14ADD008E383B /* Profile.m */; };
@@ -14,8 +17,8 @@
 		C40A3A551AA14E83008E383B /* libmysqlclient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C40A3A541AA14E83008E383B /* libmysqlclient.a */; };
 		C40A3A5A1AA15205008E383B /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C40A3A591AA15205008E383B /* libc++.dylib */; };
 		C40FD3351AA113F8001BDF88 /* Action.h in Headers */ = {isa = PBXBuildFile; fileRef = C40FD3291AA113F8001BDF88 /* Action.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		C40FD3361AA113F8001BDF88 /* DatabaseConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = C40FD32A1AA113F8001BDF88 /* DatabaseConnection.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		C40FD3371AA113F8001BDF88 /* DatabaseConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = C40FD32B1AA113F8001BDF88 /* DatabaseConnection.m */; };
+		C40FD3361AA113F8001BDF88 /* SQLiteDatabaseConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = C40FD32A1AA113F8001BDF88 /* SQLiteDatabaseConnection.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C40FD3371AA113F8001BDF88 /* SQLiteDatabaseConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = C40FD32B1AA113F8001BDF88 /* SQLiteDatabaseConnection.m */; };
 		C40FD3381AA113F8001BDF88 /* DataExtractor.h in Headers */ = {isa = PBXBuildFile; fileRef = C40FD32C1AA113F8001BDF88 /* DataExtractor.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C40FD3391AA113F8001BDF88 /* DataExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = C40FD32D1AA113F8001BDF88 /* DataExtractor.m */; };
 		C40FD33A1AA113F8001BDF88 /* EntityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C40FD32E1AA113F8001BDF88 /* EntityManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -51,6 +54,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		17DB550414FF0BB59B146C90 /* MySQLDatabaseConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySQLDatabaseConnection.h; sourceTree = "<group>"; };
+		17DB567DDA21488EC657845C /* MySQLDatabaseConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySQLDatabaseConnection.m; sourceTree = "<group>"; };
+		17DB5787070B3A8E1D2C90B3 /* DatabaseConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseConnection.h; sourceTree = "<group>"; };
 		C40018B51AA138BA0066465F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		C40A3A4E1AA14ADD008E383B /* Profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Profile.h; sourceTree = "<group>"; };
 		C40A3A4F1AA14ADD008E383B /* Profile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Profile.m; sourceTree = "<group>"; };
@@ -61,8 +67,8 @@
 		C40A3A591AA15205008E383B /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		C40FD3121AA11254001BDF88 /* liborm.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = liborm.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		C40FD3291AA113F8001BDF88 /* Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Action.h; sourceTree = "<group>"; };
-		C40FD32A1AA113F8001BDF88 /* DatabaseConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseConnection.h; sourceTree = "<group>"; };
-		C40FD32B1AA113F8001BDF88 /* DatabaseConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseConnection.m; sourceTree = "<group>"; };
+		C40FD32A1AA113F8001BDF88 /* SQLiteDatabaseConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteDatabaseConnection.h; sourceTree = "<group>"; };
+		C40FD32B1AA113F8001BDF88 /* SQLiteDatabaseConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteDatabaseConnection.m; sourceTree = "<group>"; };
 		C40FD32C1AA113F8001BDF88 /* DataExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataExtractor.h; sourceTree = "<group>"; };
 		C40FD32D1AA113F8001BDF88 /* DataExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataExtractor.m; sourceTree = "<group>"; };
 		C40FD32E1AA113F8001BDF88 /* EntityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityManager.h; sourceTree = "<group>"; };
@@ -161,8 +167,8 @@
 				C40A3A561AA14F04008E383B /* includes */,
 				C40018B71AA138C60066465F /* Frameworks */,
 				C40FD3291AA113F8001BDF88 /* Action.h */,
-				C40FD32A1AA113F8001BDF88 /* DatabaseConnection.h */,
-				C40FD32B1AA113F8001BDF88 /* DatabaseConnection.m */,
+				C40FD32A1AA113F8001BDF88 /* SQLiteDatabaseConnection.h */,
+				C40FD32B1AA113F8001BDF88 /* SQLiteDatabaseConnection.m */,
 				C40FD32C1AA113F8001BDF88 /* DataExtractor.h */,
 				C40FD32D1AA113F8001BDF88 /* DataExtractor.m */,
 				C40FD32E1AA113F8001BDF88 /* EntityManager.h */,
@@ -172,6 +178,9 @@
 				C40FD3321AA113F8001BDF88 /* ORM.h */,
 				C40FD3331AA113F8001BDF88 /* QueryBuilder.h */,
 				C40FD3341AA113F8001BDF88 /* QueryBuilder.m */,
+				17DB5787070B3A8E1D2C90B3 /* DatabaseConnection.h */,
+				17DB567DDA21488EC657845C /* MySQLDatabaseConnection.m */,
+				17DB550414FF0BB59B146C90 /* MySQLDatabaseConnection.h */,
 			);
 			path = orm;
 			sourceTree = "<group>";
@@ -200,7 +209,9 @@
 				C40FD3351AA113F8001BDF88 /* Action.h in Headers */,
 				C40FD3381AA113F8001BDF88 /* DataExtractor.h in Headers */,
 				C40FD33C1AA113F8001BDF88 /* ManagedEntity.h in Headers */,
-				C40FD3361AA113F8001BDF88 /* DatabaseConnection.h in Headers */,
+				C40FD3361AA113F8001BDF88 /* SQLiteDatabaseConnection.h in Headers */,
+				17DB519A1D8DA3FB57749C58 /* DatabaseConnection.h in Headers */,
+				17DB5B9A3AB874A605EBB9A0 /* MySQLDatabaseConnection.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,7 +297,8 @@
 				C40FD33B1AA113F8001BDF88 /* EntityManager.m in Sources */,
 				C40FD3401AA113F8001BDF88 /* QueryBuilder.m in Sources */,
 				C40FD3391AA113F8001BDF88 /* DataExtractor.m in Sources */,
-				C40FD3371AA113F8001BDF88 /* DatabaseConnection.m in Sources */,
+				C40FD3371AA113F8001BDF88 /* SQLiteDatabaseConnection.m in Sources */,
+				17DB568B75E0610364FC5DE0 /* MySQLDatabaseConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

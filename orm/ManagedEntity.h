@@ -2,6 +2,7 @@
 
 #import "Action.h"
 #import "DataExtractor.h"
+#import "DatabaseConnection.h"
 
 @interface ManagedEntity : NSObject {
     NSObject *object;
@@ -20,7 +21,7 @@
 - (NSMutableArray *)values;
 - (NSMutableDictionary *)data;
 - (NSArray *)dependenciesForAction:(enum ActionType)anAction;
-- (NSMutableArray *)columnsDefinitions;
+- (NSMutableArray *)columnsDefinitionsWithConnector:(id<DatabaseConnection>)connector;
 - (NSMutableArray *)columnsNames;
 
 @end

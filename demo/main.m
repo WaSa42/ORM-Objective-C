@@ -38,7 +38,22 @@ void demoQueryBuilder() {
 
 void demoEntityManager() {
     @try {
-        EntityManager *em = [EntityManager instantiate];
+        // SQLite :
+//        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+//        [parameters setValue:@"orm.sqlite" forKey:@"fileName"];
+//
+//        EntityManager *em = [EntityManager instantiateWithConnector:[SQLiteDatabaseConnection class] andParameters:parameters];
+
+        // MySQL :
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+        [parameters setValue:@"/Applications/MAMP/tmp/mysql/mysql.sock" forKey:@"socket"];
+        [parameters setValue:@"localhost" forKey:@"address"];
+        [parameters setValue:@"root" forKey:@"username"];
+        [parameters setValue:@"root" forKey:@"password"];
+        [parameters setValue:@"orm" forKey:@"database"];
+        [parameters setValue:@8889 forKey:@"port"];
+
+        EntityManager *em = [EntityManager instantiateWithConnector:[MySQLDatabaseConnection class] andParameters:parameters];
 
         // Insert :
         NSLog(@"insert a user :");

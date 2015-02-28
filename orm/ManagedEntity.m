@@ -66,10 +66,10 @@
     return dependencies;
 }
 
-- (NSMutableArray *)columnsDefinitions {
+- (NSMutableArray *)columnsDefinitionsWithConnector:(id<DatabaseConnection>)connector {
     NSMutableArray *definitions = [NSMutableArray array];
 
-    [definitions addObject:[NSString stringWithFormat:@"%@ INTEGER PRIMARY KEY AUTOINCREMENT", PRIMARY_KEY]];
+    [definitions addObject:[NSString stringWithFormat:@"%@ INTEGER PRIMARY KEY %@", PRIMARY_KEY, [connector getAutoIncrementKeyword]]];
 
     NSMutableArray *keys = [self keys];
     NSUInteger total = [keys count];

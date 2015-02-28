@@ -1,25 +1,16 @@
 #import <Foundation/Foundation.h>
-#import <sqlite3.h>
-#import "mysql/mysql.h"
 
-@interface DatabaseConnection : NSObject {
-    sqlite3 *database;
-    NSString *name, *extension, *originalPath, *finalPath;
-}
+@protocol DatabaseConnection <NSObject>
 
-@property (nonatomic) sqlite3 *database;
-@property (nonatomic) NSString *name;
-@property (nonatomic) NSString *extension;
-@property (nonatomic) NSString *originalPath;
-@property (nonatomic) NSString *finalPath;
++ (id)initWithParameters:(NSDictionary *)parameters;
 
-- (instancetype)init;
-+ (instancetype)instantiate;
-
-- (void)dealloc;
-
+- (NSString *)getAutoIncrementKeyword;
+- (void)connect;
 - (void)execute:(NSString *)query;
 - (id)getLastInsertId;
 - (NSArray *)getResultForQuery:(NSMutableString *)query;
+
+@optional
+- (void)dealloc;
 
 @end

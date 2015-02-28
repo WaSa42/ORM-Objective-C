@@ -5,36 +5,42 @@
 @synthesize managedEntities;
 @synthesize databaseConnection;
 
-- (instancetype)init {
+- (instancetype)initWithConnector:(Class)connector andParameters:(NSMutableDictionary *)parameters {
     self = [super init];
 
     if (self) {
         self.managedEntities = [NSMutableArray array];
-        self.databaseConnection = [DatabaseConnection instantiate];
+
+        if (![connector conformsToProtocol:@protocol(DatabaseConnection)]) {
+            [NSException raise:@"Invalid connector" format:@"The connector must be conform to the DatabaseConnection protocol"];
+        }
+
+        self.databaseConnection = [connector initWithParameters:parameters];
+        [[self databaseConnection] connect];
     }
 
     return self;
 }
 
-+ (instancetype)instantiate {
-    return [[self alloc] init];
++ (instancetype)instantiateWithConnector:(Class)connector andParameters:(NSMutableDictionary *)parameters {
+    return [[self alloc] initWithConnector:connector andParameters:parameters];
 }
 
 - (void)insert:(id)anObject {
-    [managedEntities addObject:[ManagedEntity instantiateWithObject:anObject andAction:ACTION_INSERT]];
+    [self.managedEntities addObject:[ManagedEntity instantiateWithObject:anObject andAction:ACTION_INSERT]];
 }
 
 - (void)update:(id)anObject {
-    [managedEntities addObject:[ManagedEntity instantiateWithObject:anObject andAction:ACTION_UPDATE]];
+    [self.managedEntities addObject:[ManagedEntity instantiateWithObject:anObject andAction:ACTION_UPDATE]];
 }
 
 - (void)remove:(id)anObject {
-    [managedEntities addObject:[ManagedEntity instantiateWithObject:anObject andAction:ACTION_REMOVE]];
+    [self.managedEntities addObject:[ManagedEntity instantiateWithObject:anObject andAction:ACTION_REMOVE]];
 }
 
 - (void)flush {
     // For each managed entity
-    for(ManagedEntity *managedEntity in managedEntities) {
+    for(ManagedEntity *managedEntity in self.managedEntities) {
         switch ([managedEntity action]) {
             case ACTION_INSERT:
                 [self insertManagedEntity:managedEntity];
@@ -66,7 +72,7 @@
     NSUInteger i = 0;
 
     while (i < [entities count]) {
-        NSArray *columns = [entities[i] columnsDefinitions];
+        NSArray *columns = [entities[i] columnsDefinitionsWithConnector:self.databaseConnection];
 
         [qb create:[entities[i] table] withColumns:columns];
         [queries addObject:[qb query]];
@@ -146,7 +152,7 @@
     }
 
     // Remove values
-    for (ManagedEntity *entity in [entities reverseObjectEnumerator]) {
+    for (ManagedEntity *entity in entities) {
         [[[[qb delete] from:[entity table]] where:PRIMARY_KEY] is:entity.primaryKey];
         [[self databaseConnection] execute:[qb query]];
         [qb reset];
